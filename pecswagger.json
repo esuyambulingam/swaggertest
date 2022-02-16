@@ -1,0 +1,168 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "PeCroutemaster API",
+    "version": "v1"
+  },
+  "paths": {
+    "/GetGenericProfileData": {
+      "get": {
+        "tags": [
+          "GenericProfile"
+        ],
+        "parameters": [
+          {
+            "name": "EmployeeId",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/PerformanceSummary": {
+      "get": {
+        "tags": [
+          "PerformanceSummary"
+        ],
+        "parameters": [
+          {
+            "name": "EmployeeId",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PerformanceProgress"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PerformanceProgress"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PerformanceProgress"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/GetAdditionalScreenDetails": {
+      "get": {
+        "tags": [
+          "PerformanceSummary"
+        ],
+        "parameters": [
+          {
+            "name": "EmployeeId",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "CategoryId",
+            "in": "header",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Language",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "PerformanceProgress": {
+        "required": [
+          "customerSatisfaction",
+          "deliveryOnTime",
+          "efficiencyParcelPerHrs",
+          "employeeID",
+          "id",
+          "processConformity"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "employeeID": {
+            "type": "string"
+          },
+          "dateCreated": {
+            "type": "string",
+            "format": "date"
+          },
+          "workingDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "customerSatisfaction": {
+            "type": "number",
+            "format": "double"
+          },
+          "efficiencyParcelPerHrs": {
+            "type": "number",
+            "format": "double"
+          },
+          "processConformity": {
+            "type": "number",
+            "format": "double"
+          },
+          "deliveryOnTime": {
+            "type": "number",
+            "format": "double"
+          },
+          "pointsCollected": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "overallDeliveryScore": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "drivingscoreIndex": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}
